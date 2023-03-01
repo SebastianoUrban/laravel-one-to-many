@@ -50,6 +50,7 @@ class ProjectsTableSeeder extends Seeder
             $newProject->place = $project['place'];
             $newProject->description = $project['description'];
             $newProject->image = 'placeholder.jpg';
+            $newProject->type_id = $project['type_id'];
             $newProject->save();
         }
     }
