@@ -38,6 +38,22 @@
                         <label for="image">Image</label>
                         <input type="file" name="image" id="image" value="">
                     </div>
+                    <div class="col-12">
+                        <label for="project_type" class="form-label">
+                            Project Type: 
+                        </label>
+                
+                        <select  class="form-control" id="project_type" name="type_id" >
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}">
+                
+                                    <span >
+                                        {{ $type->name }}
+                                    </span>
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-12 d-flex justify-content-center">
                         <button type="submit">Crea</button>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
@@ -25,7 +26,8 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.projects.create');
+        //return view('admin.projects.create');
+        return view('admin.projects.create', ["project" => new Project(), 'types' => Type::all()]);
     }
 
     /**
@@ -43,7 +45,8 @@ class ProjectsController extends Controller
             'end_date' => 'required',
             'place' => 'required|string|min:2|max:200',
             'description' => 'required|string|min:2',
-            'image' => 'image'
+            'image' => 'image',
+            'type_id' => 'required'
         ],
         [
             'title.required' => 'Il campo TITOLO è obbligatorio!',
@@ -74,7 +77,8 @@ class ProjectsController extends Controller
         $newProject->end_date = $data['end_date'];
         $newProject->place = $data['place'];
         $newProject->description = $data['description'];
-        $newProject->image = Storage::put('uploads', $data['image']);;
+        $newProject->image = Storage::put('uploads', $data['image']);
+        $newProject->type_id = $data['type_id'];
 
         $newProject->save();
         
@@ -99,7 +103,8 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project) {
-        return view('admin.projects.edit', compact('project'));
+        //return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', ["project" => $project, 'types' => Type::all()]);
     }
 
     /**
